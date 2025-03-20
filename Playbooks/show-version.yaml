@@ -1,15 +1,13 @@
 ---
-- name: Check switch connectivity by switch version 
+- name: Run 'show vlan' on Cisco devices
   hosts: switches
-  gather_facts: false
-
+  gather_facts: no
   tasks:
-    - name: Get version
-      cisco.ios.ios_command:
-        commands:
-          - show version | inc Model
-      register: show_version_output
+    - name: Execute show vlan command
+      ios_command:
+        commands: show vlan
+      register: vlan_output
 
-    - name: Print version
+    - name: Display VLAN command output
       debug:
-        msg: "{{ show_version_output.stdout_lines }}"
+        var: vlan_output.stdout_lines
