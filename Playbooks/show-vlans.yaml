@@ -8,27 +8,7 @@
         commands: show vlan
       register: vlan_output
 
-    - name: Filter VLAN output to remove ports
-      set_fact:
-        filtered_vlan_output: |
-          {% for line in vlan_output.stdout[0].splitlines() %}
-            {% if not line.startswith('  Port') %}
-              {{ line }}
-            {% endif %}
-          {% endfor %}
-
-    - name: Send filtered VLAN output via email
-      mail:
-        host: smtp-mail.outlook.com
-        port: 587
-        username: "cmec.scanner@outlook.com"
-        password: "EyCCfp2@teBmP@7b"
-        to: "issiah.meddaugh@badgernetworks.org"
-        from: "cmec.scanner@outlook.com"
-        subject: "Filtered VLAN Output from Switches"
-        body: |
-          Here is the filtered VLAN configuration output:
-
-          {{ filtered_vlan_output }}
-
-          -- End of Output --
+    - name: Display VLAN command output
+      debug:
+        var: vlan_output.stdout_lines
+ 
