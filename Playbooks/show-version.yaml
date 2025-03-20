@@ -1,0 +1,15 @@
+---
+- name: Check switch connectivity by switch version 
+  hosts: switches
+  gather_facts: false
+
+  tasks:
+    - name: Get version
+      cisco.ios.ios_command:
+        commands:
+          - show version | inc Model
+      register: show_version_output
+
+    - name: Print version
+      debug:
+        msg: "{{ show_version_output.stdout_lines }}"
