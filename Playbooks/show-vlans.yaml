@@ -6,9 +6,7 @@
     - name: Execute show vlan command
       ios_command:
         commands: show vlan
-      register: vlan_output
-
+        register: vlan_output
     - name: Display VLAN command output
       debug:
         var: vlan_output.stdout_lines
- 
