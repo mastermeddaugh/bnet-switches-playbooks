@@ -1,9 +1,22 @@
 ---
 all:
-  hosts:
-    switches:
-      ansible_host: 192.168.10.171
-      ansible_network_os: ios 
-      ansible_user: admin 
-      ansible_password: admin
-      ansible_connection: network_cli
+####################
+# Network Switches #
+####################
+  children:
+    all_switches:
+      children:
+        all_switches:
+          children:
+            USWI-DC01-FL01-SW01:
+              hosts: 192.168.10.170
+              ansible_network_os: ios 
+              ansible_user: admin 
+              ansible_password: admin
+              ansible_connection: network_cli
+            USWI-DC01-FL01-SW02:
+              hosts: 192.168.10.171
+              ansible_network_os: ios 
+              ansible_user: admin 
+              ansible_password: admin
+              ansible_connection: network_cli
