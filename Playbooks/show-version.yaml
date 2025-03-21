@@ -1,6 +1,6 @@
 ---
 - name: Run 'show vlan' on Cisco devices
-  hosts: switches
+  hosts: USWI_DC01_FL01_SWITCHES
   gather_facts: no
   collections:
     - cisco.ios  
